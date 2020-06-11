@@ -19,7 +19,7 @@ export default class Main extends Component {
 
     render() {
         return (
-            <div>
+            <>
                 <Navbar dark color="primary">
                     <div className="container">
                         <NavbarBrand href="/">Ristorante Con Fusion</NavbarBrand>
@@ -35,7 +35,7 @@ export default class Main extends Component {
                             d.id === this.state.selectedDish)[0]}
                     />
                 </div>
-            </div>
+            </>
         );
     }
 }
