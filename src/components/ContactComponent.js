@@ -16,8 +16,6 @@ export default class Contact extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-
-
     handleSubmit(val) {
         console.log('Current State is: ' + JSON.stringify(val));
         alert('Current State is: ' + JSON.stringify(val));
@@ -167,7 +165,7 @@ export default class Contact extends Component {
                                     </div >
                                 </Col>
                                 <Col md={{ size: 3, offset: 1 }}>
-                                    <Control.select model=".conatactType" name="contactType"
+                                    <Control.select model=".contactType" name="contactType"
                                         className="form-control"
                                     >
                                         <option>Tel.</option>
