@@ -8,7 +8,7 @@ import {
 } from 'reactstrap'
 import { Link } from 'react-router-dom'
 import { Loading } from './LoadingComponent'
-
+import { baseUrl } from '../shared/baseUrl'
 
 export default function DishDetail({ dish, isLoading, errMess, comments, addComment }) {
 
@@ -67,7 +67,7 @@ export default function DishDetail({ dish, isLoading, errMess, comments, addComm
                         <div className="row">
                             <div className="col-12 col-md-5 mt-1">
                                 <Card>
-                                    <CardImg idth="100%" src={dish.image} alt={dish.name} />
+                                    <CardImg idth="100%" src={`${baseUrl}/${dish.image}`} alt={dish.name} />
                                     <CardImgOverlay body="true" className="ml-5">
                                         <CardTitle heading="true">{dish.name}</CardTitle>
                                     </CardImgOverlay>

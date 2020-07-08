@@ -2,7 +2,7 @@ import React from 'react'
 import { Card, CardImg, CardImgOverlay, CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap'
 import { Link } from 'react-router-dom'
 import { Loading } from './LoadingComponent'
-
+import { baseUrl } from '../shared/baseUrl'
 
 export default function Menu({ dishes }) {
 
@@ -11,7 +11,7 @@ export default function Menu({ dishes }) {
             <div key={d.id} className="col-12 col-md-5 mt-1">
                 <Card>
                     <Link to={`/menu/${d.id}`}>
-                        <CardImg width="100%" src={d.image} alt={d.name} />
+                        <CardImg width="100%" src={`${baseUrl}/${d.image}`} alt={d.name} />
                         <CardImgOverlay body="true" className="ml-5">
                             <CardTitle heading="true">{d.name}</CardTitle>
                         </CardImgOverlay>
