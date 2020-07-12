@@ -9,8 +9,9 @@ import {
 import { Link } from 'react-router-dom'
 import { Loading } from './LoadingComponent'
 import { baseUrl } from '../shared/baseUrl'
+import { FadeTransform, Fade, Stagger } from 'react-animation-components'
 
-export default function DishDetail({ dish, isLoading, errMess, comments, addComment }) {
+export default function DishDetail({ dish, isLoading, errMess, comments, postComment }) {
 
     const [modalOpen, setModalOpen] = useState(false)
 
@@ -20,12 +21,17 @@ export default function DishDetail({ dish, isLoading, errMess, comments, addComm
                 comments.map(c => {
                     return (
                         <ul className="m-0 p-0" key={c.id}>
-                            <li className="list-unstyled">{c.comment}
-                                <p>-- {c.author}, &nbsp;
+                            <Stagger in>
+                                <Fade in>
+                                    <li className="list-unstyled">{c.comment}
+                                        <p>-- {c.author}, &nbsp;
                                 {new Intl.DateTimeFormat('en-us',
-                                    { year: 'numeric', month: 'short', day: '2-digit' })
-                                        .format(new Date(Date.parse(c.date)))}</p>
-                            </li>
+                                            { year: 'numeric', month: 'short', day: '2-digit' })
+                                                .format(new Date(Date.parse(c.date)))}</p>
+                                    </li>
+                                </Fade>
+                            </Stagger>
+
                         </ul>
                     )
                 }) : <div><p>No comments yet</p></div>
@@ -66,15 +72,20 @@ export default function DishDetail({ dish, isLoading, errMess, comments, addComm
                         </div>
                         <div className="row">
                             <div className="col-12 col-md-5 mt-1">
-                                <Card>
-                                    <CardImg idth="100%" src={`${baseUrl}/${dish.image}`} alt={dish.name} />
-                                    <CardImgOverlay body="true" className="ml-5">
-                                        <CardTitle heading="true">{dish.name}</CardTitle>
-                                    </CardImgOverlay>
-                                    <CardBody>
-                                        <CardText>{dish.description}</CardText>
-                                    </CardBody>
-                                </Card>
+                                <FadeTransform in transformProps={{
+                                    exitTransform: 'scale(0.5) translateY(-50%)'
+                                }}>
+                                    <Card>
+                                        <CardImg idth="100%" src={`${baseUrl}/${dish.image}`} alt={dish.name} />
+                                        <CardImgOverlay body="true" className="ml-5">
+                                            <CardTitle heading="true">{dish.name}</CardTitle>
+                                        </CardImgOverlay>
+                                        <CardBody>
+                                            <CardText>{dish.description}</CardText>
+                                        </CardBody>
+                                    </Card>
+                                </FadeTransform>
+
                             </div>
                             <div className="col-12 col-md-5 mt-1">
                                 <h2>Comments</h2>
@@ -86,7 +97,7 @@ export default function DishDetail({ dish, isLoading, errMess, comments, addComm
                         <Modal isOpen={modalOpen} toggle={() => setModalOpen(!modalOpen)}>
                             <ModalHeader toggle={() => setModalOpen(!modalOpen)} className="ml-3">Submit Comment</ModalHeader>
                             <ModalBody>
-                                <CommentForm dishId={dish.id} addComment={addComment} />
+                                <CommentForm dishId={dish.id} postComment={postComment} />
                             </ModalBody>
                         </Modal>
 

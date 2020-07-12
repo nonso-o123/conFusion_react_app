@@ -8,11 +8,11 @@ const maxLength = len => val => !val || val.length <= len
 const minLength = len => val => !val || val.length >= len
 
 
-export default function CommentForm({ addComment, dishId }) {
+export default function CommentForm({ postComment, dishId }) {
 
 
     const handleSubmit = (val) => {
-        addComment(dishId, val.rating, val.author, val.comment)
+        postComment(dishId, val.rating, val.author, val.comment)
     }
 
 
